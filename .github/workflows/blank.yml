@@ -1,27 +1,13 @@
 name: job
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello this is build"
+      - name: checkout
+        uses: actions/checkout@v4
 
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Hello this is test"
-
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Hello this is deploy"
+      - name: Read index file
+        run: cat index.html
